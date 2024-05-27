@@ -56,6 +56,10 @@ post '/visit' do
 		@error = 'Неправильная дата и время'
 	end
 
+	if @error != ''
+		return erb :visit
+	end
+
 	erb "Ok, username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
 	
 end

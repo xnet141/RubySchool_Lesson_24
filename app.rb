@@ -44,10 +44,18 @@ post '/visit' do
 	@barber = params[:barber]
 	@color = params[:color]
 
-	f = File.open 'public/user.txt', 'a' #режим 'а' значит append, то есть добавить в конец файла
-	f.write "\nUser: #{@username}, Phone: #{@phone}, Date and time: #{@datetime}, Barber: #{@barber}, Color: #{@color}<br>"
-	f.close
-	erb :visit
+	if @username.length > 0 && @phone.length > 0 && @datetime.length > 0 && @barber.length > 0 && @color.length > 0 
+
+		f = File.open 'public/user.txt', 'a' #режим 'а' значит append, то есть добавить в конец файла
+		f.write "\nUser: #{@username}, Phone: #{@phone}, Date and time: #{@datetime}, Barber: #{@barber}, Color: #{@color}<br>"
+		f.close
+		erb :visit
+
+	else
+
+		@error = 'Заполните все поля!!'
+		erb :visit
+	end	
 end
 
 post '/login' do

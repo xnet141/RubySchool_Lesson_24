@@ -44,18 +44,20 @@ post '/visit' do
 	@barber = params[:barber]
 	@color = params[:color]
 
-	if @username.length > 0 && @phone.length > 0 && @datetime.length > 0 && @barber.length > 0 && @color.length > 0 
+	if @username == ''
+		@error = 'Введите имя'
+	end
 
-		f = File.open 'public/user.txt', 'a' #режим 'а' значит append, то есть добавить в конец файла
-		f.write "\nUser: #{@username}, Phone: #{@phone}, Date and time: #{@datetime}, Barber: #{@barber}, Color: #{@color}<br>"
-		f.close
-		erb :visit
+	if @phone == ''
+		@error = 'Введите номер телефона'
+	end
 
-	else
+	if @datetime == ''
+		@error = 'Неправильная дата и время'
+	end
 
-		@error = 'Заполните все поля!!'
-		erb :visit
-	end	
+	erb "Ok, username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
+	
 end
 
 post '/login' do

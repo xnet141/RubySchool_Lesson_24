@@ -60,11 +60,11 @@ post '/visit' do
 	if @error == ''
 		return erb "Ok, username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
 		
-	elsif @error != ''
+	else
 		return erb :visit
 
 	end
-	
+
 end
 
 post '/login' do

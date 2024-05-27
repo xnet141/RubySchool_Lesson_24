@@ -43,6 +43,7 @@ post '/visit' do
 	@datetime = params[:datetime]
 	@barber = params[:barber]
 	@color = params[:color]
+	@error = ''
 
 	if @username == ''
 		@error = 'Введите имя'
@@ -56,11 +57,13 @@ post '/visit' do
 		@error = 'Неправильная дата и время'
 	end
 
-	if @error != ''
+	if @error == ''
+		return erb "Ok, username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
+		
+	elsif @error != ''
 		return erb :visit
-	end
 
-	erb "Ok, username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
+	end
 	
 end
 

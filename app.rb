@@ -57,19 +57,20 @@ post '/contacts' do
   	# })
 
 	Pony.mail(
-	  	:to => 'xnet141@gmail.com', 
-	  	:from => 'xnet141@gmail.com',
-	  	:subject => 'test', 
-	  	:body => "test pony", 
+		#:from => params[:mail], # зачем :from ???
+	  	:to => 'mh101@yandex.ru', 
+	  	
+	  	:subject => params[:name] + ' has contacted you', 
+	  	:body => params[:mail] + ' ' + params[:body], 
 	  	:via => :smtp, 
 	  	:via_options => {
-	      :address     => 'smtp.gmail.com',
-	      :port                 => '587',
-    :enable_starttls_auto => true,
-    :user_name            => 'xnet141',
-    :password             => 'zwke kkvl svbv jlsr',
-    :authentication       => :plain, # :plain, :login, :cram_md5, no auth by default
-    :domain               => "localhost.localdomain" # the HELO domain provided by the client to the server
+	      	:address     => 'smtp.gmail.com',
+	      	:port                 => '587',
+		    :enable_starttls_auto => true,
+		    :user_name            => 'xnet141',
+		    :password             => 'zwke kkvl svbv jlsr',
+		    :authentication       => :plain, # :plain, :login, :cram_md5, no auth by default
+		    :domain               => "localhost.localdomain" # the HELO domain provided by the client to the server
     	}
 	)	
 
